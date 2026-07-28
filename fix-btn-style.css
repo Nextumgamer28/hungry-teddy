@@ -1,0 +1,9 @@
+.floating-order-btn {
+    background: linear-gradient(135deg, #FCD34D 0%, #D4AF37 100%) !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2) !important;
+}
+.floating-order-btn span {
+    filter: brightness(0) invert(1);
+}

@@ -1,0 +1,12 @@
+{
+  "name": "hungry-teddy",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "build": "mkdir -p dist && cp index.html dist/ && cp -r css dist/css && cp -r js dist/js && [ -d assets ] && cp -r assets dist/assets || true"
+  },
+  "dependencies": {
+    "jsdom": "^30.0.0"
+  }
+}

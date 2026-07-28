@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Taste of Haldwani by Hungry Teddy - A whimsical dark premium Indian Cloud Kitchen experience with an interactive mascot, gourmet dishes, and delightful conversations.">
+    <meta name="theme-color" content="#0d0e12">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Hungry Teddy — Taste of Haldwani Cloud Kitchen</title>
+
+    <!-- Google Fonts Preconnect & Imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/teddy.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧸</text></svg>">
+</head>
+<body class="is-loading">
+
+    <!-- Ambient Glowing Background Elements -->
+    <div class="ambient-light ambient-light-1" aria-hidden="true"></div>
+    <div class="ambient-light ambient-light-2" aria-hidden="true"></div>
+    <div class="ambient-light ambient-light-3" aria-hidden="true"></div>
+
+    <!-- 1. LOADING SCREEN -->
+    <div id="loading-screen" class="loading-screen" role="progressbar" aria-label="Loading Taste of Haldwani Experience" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="loader-content">
+            <div class="loader-teddy-icon" aria-hidden="true">
+                <span class="sleeping-z z-1">Z</span>
+                <span class="sleeping-z z-2">z</span>
+                <span class="sleeping-z z-3">z</span>
+                🧸
+            </div>
+            <h1 class="loader-title">Hungry Teddy</h1>
+            <p class="loader-subtitle">Waking up the chef...</p>
+            <div class="progress-bar-container" aria-hidden="true">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <span id="progress-text" class="progress-text" aria-live="polite">0%</span>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER / NAVBAR -->
+    <header class="main-header glass-header" id="main-header">
+        <div class="header-container">
+            <a href="#hero" class="brand-logo" aria-label="Hungry Teddy Home">
+                <span class="logo-icon" aria-hidden="true">🧸</span>
+                <span class="logo-text">Hungry<span class="logo-accent">Teddy</span></span>
+            </a>
+
+            <nav class="main-nav" id="main-nav" aria-label="Primary Navigation">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link active">Meet Teddy</a></li>
+                    <li><a href="#story" class="nav-link">Our Story</a></li>
+                    <li><a href="#menu" class="nav-link">Gourmet Menu</a></li>
+                    <li><a href="#contact" class="nav-link">Find Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Language Selector is dynamically injected here by language.js -->
+                <button id="sound-toggle" class="btn-icon glass-btn" aria-label="Toggle Sound Effects" title="Toggle Sound">
+                    <span class="sound-icon sound-on" aria-hidden="true">🔊</span>
+                    <span class="sound-icon sound-off hidden" aria-hidden="true">🔇</span>
+                </button>
+                <button id="cart-toggle" class="btn-icon glass-btn" aria-label="View Order Tray">
+                    <span class="cart-icon" aria-hidden="true">🍽️</span>
+                    <span id="cart-badge" class="cart-badge" aria-label="Items in cart">0</span>
+                </button>
+                <button id="mobile-menu-toggle" class="btn-icon glass-btn mobile-only" aria-label="Open Navigation Menu" aria-expanded="false" aria-controls="main-nav">
+                    <span class="hamburger-bar" aria-hidden="true"></span>
+                    <span class="hamburger-bar" aria-hidden="true"></span>
+                    <span class="hamburger-bar" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <main id="main-content">
+
+        <!-- 2. HERO / INTERACTIVE TEDDY SECTION -->
+        <section id="hero" class="hero-section" aria-label="Interactive Teddy Stage">
+            <div class="hero-container">
+                
+                <!-- Stage background elements -->
+                <div class="stage-backdrop" aria-hidden="true">
+                    <div class="spotlight"></div>
+                    <div class="floating-food-particle p1">🍔</div>
+                    <div class="floating-food-particle p2">🍕</div>
+                    <div class="floating-food-particle p3">🍩</div>
+                    <div class="floating-food-particle p4">🍟</div>
+                    <div class="floating-food-particle p5">Ramen</div>
+                </div>
+
+                <!-- Interactive Stage Grid -->
+                <div class="stage-grid">
+                    
+                    <!-- Left / Top Interactive Speech & Controls -->
+                    <div class="dialogue-column">
+                        <!-- Dialogue Glass Box -->
+                        <div id="dialogue-box" class="glass-card dialogue-box" aria-live="polite" aria-atomic="true">
+                            <header class="dialogue-header">
+                                <span id="teddy-status-badge" class="status-badge sleeping" role="status">Sleeping...</span>
+                                <span id="dialogue-speaker" class="dialogue-speaker">Teddy</span>
+                            </header>
+                            <div class="dialogue-body">
+                                <p id="dialogue-text" class="dialogue-text">Zzz... Snore... (Tap on Teddy to wake him up!)</p>
+                            </div>
+                            <!-- Dynamic Choice Container -->
+                            <div id="dialogue-options" class="dialogue-options"></div>
+                        </div>
+
+                        <!-- User Name Input Form -->
+                        <div id="name-input-card" class="glass-card name-input-card hidden">
+                            <h2 class="card-title" id="name-input-title">What should Teddy call you?</h2>
+                            <form id="name-form" class="name-form" onsubmit="return false;" aria-labelledby="name-input-title">
+                                <div class="input-group" style="flex-direction: column; gap: var(--space-sm);">
+                                    <input type="text" id="user-name-input" class="glass-input" placeholder="Enter your name..." maxlength="20" required autocomplete="given-name" aria-label="Your name" style="width: 100%;">
+                                    <select id="user-gender-input" class="glass-input" required aria-label="Your gender" style="width: 100%; background: var(--glass-bg); color: var(--text-primary); border: 1px solid var(--glass-border);">
+                                        <option value="" disabled selected>Select Gender</option>
+                                        <option value="male" style="color: #000;">Male</option>
+                                        <option value="female" style="color: #000;">Female</option>
+                                        <option value="neutral" style="color: #000;">Prefer not to say</option>
+                                    </select>
+                                    <button type="submit" id="name-submit-btn" class="btn btn-primary" style="width: 100%;">Introduce</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right / Center Teddy Mascot Showcase -->
+                    <div class="teddy-column">
+                        <div id="teddy-stage" class="teddy-stage" role="button" tabindex="0" aria-label="Tap to interact with Teddy">
+                            <div id="tap-hint" class="tap-hint pulse-animation" aria-hidden="true">
+                                <span class="hand-icon">👇</span>
+                                <span class="hint-text">Tap Teddy!</span>
+                            </div>
+                            <div id="teddy-container" class="teddy-container sleeping-state">
+                                <svg id="teddy-svg" viewBox="0 0 400 450" class="teddy-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive Hungry Teddy Mascot">
+                                    <defs>
+                                        <radialGradient id="fur-gradient" cx="40%" cy="30%" r="70%"><stop offset="0%" stop-color="#C68B59" /><stop offset="60%" stop-color="#8B5E34" /><stop offset="100%" stop-color="#5C3D1E" /></radialGradient>
+                                        <radialGradient id="inner-ear-gradient" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#F3C5A5" /><stop offset="100%" stop-color="#D49A73" /></radialGradient>
+                                        <radialGradient id="snout-gradient" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#FFF3E2" /><stop offset="100%" stop-color="#E2C7A7" /></radialGradient>
+                                        <linearGradient id="chef-hat-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFFFFF" /><stop offset="100%" stop-color="#DCDDE1" /></linearGradient>
+                                        <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-opacity="0.35"/></filter>
+                                    </defs>
+                                    <ellipse cx="200" cy="410" rx="110" ry="20" fill="rgba(0, 0, 0, 0.4)" filter="blur(6px)" />
+                                    <g id="teddy-character">
+                                        <g id="teddy-ears">
+                                            <circle id="ear-left" cx="105" cy="115" r="42" fill="url(#fur-gradient)" />
+                                            <circle cx="105" cy="115" r="26" fill="url(#inner-ear-gradient)" />
+                                            <circle id="ear-right" cx="295" cy="115" r="42" fill="url(#fur-gradient)" />
+                                            <circle cx="295" cy="115" r="26" fill="url(#inner-ear-gradient)" />
+                                        </g>
+                                        <path id="teddy-body" d="M 120 230 C 100 270 95 360 140 395 C 170 415 230 415 260 395 C 305 360 300 270 280 230 Z" fill="url(#fur-gradient)" />
+                                        <ellipse cx="200" cy="320" rx="65" ry="55" fill="url(#snout-gradient)" opacity="0.9" />
+                                        <g id="teddy-arms">
+                                            <path id="arm-left" d="M 110 240 C 70 260 60 310 85 330 C 105 345 125 310 125 270 Z" fill="url(#fur-gradient)" />
+                                            <path id="arm-right" d="M 290 240 C 330 260 340 310 315 330 C 295 345 275 310 275 270 Z" fill="url(#fur-gradient)" />
+                                        </g>
+                                        <g id="teddy-apron">
+                                            <path d="M 155 260 L 245 260 L 260 380 L 140 380 Z" fill="#E74C3C" rx="5" />
+                                            <path d="M 170 220 L 180 260 M 230 220 L 220 260" stroke="#C0392B" stroke-width="6" stroke-linecap="round" />
+                                            <circle cx="200" cy="310" r="12" fill="#F1C40F" />
+                                        </g>
+                                        <g id="teddy-head">
+                                            <circle cx="200" cy="180" r="105" fill="url(#fur-gradient)" filter="url(#soft-shadow)" />
+                                            <g id="face-group">
+                                                <ellipse cx="200" cy="205" rx="42" ry="32" fill="url(#snout-gradient)" />
+                                                <path d="M 188 190 Q 200 182 212 190 Q 200 212 188 190 Z" fill="#2C3E50" />
+                                                <ellipse cx="195" cy="189" rx="3" ry="2" fill="#FFFFFF" opacity="0.6" />
+                                                <path id="teddy-mouth" d="M 188 206 Q 200 216 212 206" stroke="#2C3E50" stroke-width="3.5" stroke-linecap="round" fill="none" />
+                                                <circle id="blush-left" cx="135" cy="200" r="14" fill="#FF7675" opacity="0" />
+                                                <circle id="blush-right" cx="265" cy="200" r="14" fill="#FF7675" opacity="0" />
+                                                <g id="teddy-eyes">
+                                                    <path id="eye-closed-left" d="M 145 170 Q 160 180 175 170" stroke="#2C3E50" stroke-width="4.5" stroke-linecap="round" fill="none" style="display: none;" />
+                                                    <path id="eye-closed-right" d="M 225 170 Q 240 180 255 170" stroke="#2C3E50" stroke-width="4.5" stroke-linecap="round" fill="none" style="display: none;" />
+                                                    <g id="eyes-awake">
+                                                        <g id="left-eye-group">
+                                                            <circle id="left-pupil" cx="160" cy="165" r="14" fill="#2C3E50"/>
+                                                            <circle cx="156" cy="160" r="5" fill="#FFFFFF"/>
+                                                            <circle cx="163" cy="169" r="2" fill="#FFFFFF"/>
+                                                        </g>
+                                                        <g id="right-eye-group">
+                                                            <circle id="right-pupil" cx="240" cy="165" r="14" fill="#2C3E50"/>
+                                                            <circle cx="236" cy="160" r="5" fill="#FFFFFF"/>
+                                                            <circle cx="243" cy="169" r="2" fill="#FFFFFF"/>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                            <g id="zzz-group" class="teddy-zzz">
+                                                <text x="240" y="80" font-family="Arial" font-weight="bold" font-size="24" fill="#FFFFFF" class="zzz-1">Z</text>
+                                                <text x="260" y="50" font-family="Arial" font-weight="bold" font-size="32" fill="#FFFFFF" class="zzz-2">Z</text>
+                                                <text x="290" y="10" font-family="Arial" font-weight="bold" font-size="40" fill="#FFFFFF" class="zzz-3">Z</text>
+                                            </g>
+                                            <g id="chef-hat" transform="translate(0,-20)">
+                                                <path d="M145 100 Q130 50 170 45 Q200 30 230 45 Q270 50 255 100 Z" fill="url(#chef-hat-grad)" />
+                                                <rect x="150" y="92" width="100" height="22" rx="4" fill="#FFFFFF" />
+                                                <line x1="150" y1="114" x2="250" y2="114" stroke="#E74C3C" stroke-width="4" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Transition Jump Button -->
+                <div id="quick-action-bar" class="quick-action-bar hidden">
+                    <button class="btn btn-secondary glass-btn-hover" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
+                        📖 View Menu
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. OUR STORY SECTION -->
+        <section id="story" class="story-section" aria-labelledby="story-title">
+            <div class="section-container">
+                <header class="section-header">
+                    <span class="section-tagline">Behind The Apron</span>
+                    <h2 class="section-title" id="story-title">The Legend of Hungry Teddy</h2>
+                    <p class="section-description">How a cute bear with an uncontrollable appetite created the city's favorite cozy dining nook.</p>
+                </header>
+
+                <div class="story-grid">
+                    <article class="story-card glass-card">
+                        <div class="story-icon" aria-hidden="true">🍯</div>
+                        <h3>The Discovery</h3>
+                        <p>Teddy didn't want to hibernate; winter was far too long to go without fresh meals. He ventured out into the grand city in search of warm recipes and honeyed delicacies.</p>
+                    </article>
+
+                    <article class="story-card glass-card">
+                        <div class="story-icon" aria-hidden="true">👨‍🍳</div>
+                        <h3>The Secret Secret Ingredients</h3>
+                        <p>Combining wood-fired techniques with playful presentation, Teddy perfected dishes that warm the heart as much as they satisfy deep hunger.</p>
+                    </article>
+
+                    <article class="story-card glass-card">
+                        <div class="story-icon" aria-hidden="true">🌟</div>
+                        <h3>The Experience</h3>
+                        <p>Every plate served is Teddy-approved. We welcome guests not just to eat, but to laugh, rest, and spark memorable conversations.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. GOURMET MENU SECTION -->
+        <section id="menu" class="menu-section" aria-labelledby="menu-title">
+            <div class="section-container">
+                <header class="section-header">
+                    <span class="section-tagline">Crafted With Love</span>
+                    <h2 class="section-title" id="menu-title">Teddy's Signature Menu</h2>
+                    <p class="section-description">Explore our curated offerings, cooked fresh daily with top-tier organic ingredients.</p>
+                </header>
+
+                <nav class="menu-filters" role="tablist" aria-label="Menu Categories" aria-controls="menu-grid">
+                    <!-- Filters dynamically mapped by menu.js and language.js -->
+                    <button class="filter-btn active" data-category="all" role="tab" aria-selected="true">All Delights</button>
+                    <button class="filter-btn" data-category="maggi" role="tab" aria-selected="false">Teddy's Maggi</button>
+                    <button class="filter-btn" data-category="paratha" role="tab" aria-selected="false">Hot Parathas</button>
+                    <button class="filter-btn" data-category="rice" role="tab" aria-selected="false">Masala Rice</button>
+                    <button class="filter-btn" data-category="pizza" role="tab" aria-selected="false">Desi Pizza</button>
+                    <button class="filter-btn" data-category="beverage" role="tab" aria-selected="false">Kadak Chai</button>
+                </nav>
+
+                <div id="menu-grid" class="menu-grid" role="tabpanel" aria-live="polite">
+                    <!-- Fallback loading placeholders -->
+                    <div class="menu-item-skeleton glass-card"></div>
+                    <div class="menu-item-skeleton glass-card"></div>
+                    <div class="menu-item-skeleton glass-card"></div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+                <!-- ORDER ON SECTION -->
+                <section class="order-on-section reveal-on-scroll" aria-labelledby="desktop-order-title">
+                    <h2 class="order-section-title" id="desktop-order-title">Order On</h2>
+                    <div class="platform-logo-grid">
+                        <a href="https://link.zomato.com/xqzv/rshare?id=827902163056391b" target="_blank" rel="noopener noreferrer" class="platform-logo-card" aria-label="Order on Zomato">
+                            <img src="assets/app-logo/zomato.webp" alt="Zomato" class="platform-logo-img">
+                            <span class="platform-logo-name">Zomato</span>
+                        </a>
+                        <a href="https://www.swiggy.com/direct/brand/570886?source=swiggy-direct&subSource=generic" target="_blank" rel="noopener noreferrer" class="platform-logo-card" aria-label="Order on Swiggy">
+                            <img src="assets/app-logo/swiggy.webp" alt="Swiggy" class="platform-logo-img">
+                            <span class="platform-logo-name">Swiggy</span>
+                        </a>
+                        <a href="https://magicpin.in/Haldwani/Haldwani/Restaurant/Taste-Of-Haldwani/store/16b5380/delivery" target="_blank" rel="noopener noreferrer" class="platform-logo-card" aria-label="Order on Magicpin">
+                            <img src="assets/app-logo/magicpin.webp" alt="Magicpin" class="platform-logo-img">
+                            <span class="platform-logo-name">Magicpin</span>
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.streeteats.hld" target="_blank" rel="noopener noreferrer" class="platform-logo-card" aria-label="Order on StreetEats">
+                            <img src="assets/app-logo/streeteats.webp" alt="StreetEats" class="platform-logo-img">
+                            <span class="platform-logo-name">StreetEats</span>
+                        </a>
+                    </div>
+                </section>
+
+
+        <!-- 6. LOCATION & CONTACT SECTION -->
+        <section id="contact" class="contact-section" aria-labelledby="contact-title">
+            <div class="section-container" style="max-width: 700px; margin: 0 auto;">
+                <div class="contact-grid" style="grid-template-columns: 1fr;">
+                    <address class="contact-info glass-card" style="font-style: normal;">
+                        <h3 id="contact-title">Taste of Haldwani</h3>
+                        <ul class="contact-list">
+                            <li><span aria-hidden="true">📍</span> <strong>Address:</strong> Aam Ka Bagicha, Gaujajali Uttar, Haldwani, Uttarakhand 263139, India</li>
+                            <li><span aria-hidden="true">⏰</span> <strong>Hours:</strong> Open 24 Hours, Monday – Saturday</li>
+                            <li><span aria-hidden="true">📞</span> <strong>Phone:</strong> <a href="tel:+919756893149">+91 9756893149</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/tasteofhaldwani" target="_blank" rel="noopener noreferrer" class="social-icon glass-btn" aria-label="Follow us on Instagram" style="width: auto; padding: 0 1.2rem; border-radius: 50px; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📸</span>
+                                <span style="font-weight: 700;">Instagram</span>
+                            </a>
+                        </div>
+                    </address>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FLOATING ORDER BUTTON -->
+    <button id="mobile-order-btn" type="button" class="floating-order-btn" aria-haspopup="dialog" aria-controls="order-bottom-sheet">
+        <span style="font-size: 1.2rem;">🍽️</span> Khana Order Karein
+    </button>
+
+    <!-- MOBILE FLOATING CART -->
+    <button id="mobile-floating-cart" class="mobile-floating-cart mobile-only" aria-haspopup="dialog" aria-controls="order-bottom-sheet">
+        <div class="cart-left">
+            <span class="cart-icon">🛒</span>
+            <div class="cart-badge-container">
+                <span class="cart-info-text"><span id="mobile-cart-count">0 Items</span> &nbsp;&nbsp; <span id="mobile-cart-total">₹0</span></span>
+            </div>
+        </div>
+        <div class="cart-right">
+            <span>View Order</span>
+            <span class="arrow-icon">→</span>
+        </div>
+    </button>
+
+    <!-- SHOPPING TRAY / CART DRAWER MODAL -->
+    <aside id="cart-drawer" class="cart-drawer glass-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+        <header class="drawer-header">
+            <h2 id="cart-title" style="font-size: 1.25rem; margin: 0;">Your Feast Tray 🍽️</h2>
+            <button id="cart-close-btn" class="btn-icon glass-btn" aria-label="Close Order Tray">✕</button>
+        </header>
+        <div id="cart-items" class="drawer-body">
+            <p class="empty-cart-msg">Your tray is currently empty. Teddy is waiting for your order!</p>
+        </div>
+        <footer class="drawer-footer">
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button id="checkout-btn" class="btn btn-primary btn-block" disabled>Proceed to Order</button>
+        </footer>
+    </aside>
+
+    <!-- MOBILE ORDER BOTTOM SHEET -->
+    <aside id="order-bottom-sheet" class="bottom-sheet glass-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+        <header class="sheet-header">
+            <h2 id="sheet-title">Choose Your Favorite Platform</h2>
+            <button id="sheet-close-btn" class="btn-icon glass-btn" aria-label="Close Platform Menu">✕</button>
+        </header>
+        <div class="sheet-body">
+            <nav class="platform-logo-grid" aria-label="Delivery Platforms">
+                <a href="https://link.zomato.com/xqzv/rshare?id=827902163056391b" target="_blank" rel="noopener noreferrer" class="platform-logo-card" aria-label="Order on Zomato">
+                    <img src="assets/app-logo/zomato.webp" alt="Zomato" class="platform-logo-img">
+                            <span class="platform-logo-name">Zomato</span>
+                </a>
+                <a href="https://www.swiggy.com/direct/brand/570886?source=swiggy-direct&subSource=generic" target="_blank" rel="noopener noreferrer" class="platform-logo-card" aria-label="Order on Swiggy">
+                    <img src="assets/app-logo/swiggy.webp" alt="Swiggy" class="platform-logo-img">
+                            <span class="platform-logo-name">Swiggy</span>
+                </a>
+                <a href="https://magicpin.in/Haldwani/Haldwani/Restaurant/Taste-Of-Haldwani/store/16b5380/delivery" target="_blank" rel="noopener noreferrer" class="platform-logo-card" aria-label="Order on Magicpin">
+                    <img src="assets/app-logo/magicpin.webp" alt="Magicpin" class="platform-logo-img">
+                            <span class="platform-logo-name">Magicpin</span>
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.streeteats.hld" target="_blank" rel="noopener noreferrer" class="platform-logo-card" aria-label="Order on StreetEats">
+                    <img src="assets/app-logo/streeteats.webp" alt="StreetEats" class="platform-logo-img">
+                            <span class="platform-logo-name">StreetEats</span>
+                </a>
+            </nav>
+            
+            <a href="tel:+919756893149" class="btn btn-primary btn-block call-btn" id="mobile-call-btn" style="margin-top: 1.5rem;">
+                📞 Call Restaurant
+            </a>
+        </div>
+    </aside>
+
+    <!-- MODAL BACKDROP OVERLAY -->
+    <div id="modal-overlay" class="modal-overlay hidden" aria-hidden="true"></div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="footer-logo">🧸 Hungry Teddy</span>
+                <p>Bringing warmth, delicious comfort food, and joy to your dining table.</p>
+            </div>
+            <div class="footer-copy">
+                <p>&copy; <span id="current-year">2026</span> Hungry Teddy Restaurant. All rights reserved.</p>
+                <p class="crafted-text">Crafted with ❤️ and Vanilla JS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT MODULE SCRIPTS (Strictly Ordered for Phase 2 Architecture) -->
+    <script src="js/constants.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/personality.js"></script>
+    <script src="js/dialogue.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/sound.js"></script>
+    <script src="js/teddy.js"></script>
+    <script src="js/ai_brain.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Hungry Teddy",
+  "description": "Interactive restaurant website featuring Hungry Teddy mascot",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
