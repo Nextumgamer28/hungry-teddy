@@ -1,8 +1,0 @@
-.mobile-floating-cart .cart-info-text {
-    font-size: 1.15rem;
-    color: var(--text-light);
-    font-weight: 700;
-}
-.mobile-floating-cart #mobile-cart-total {
-    color: var(--accent-gold);
-}
