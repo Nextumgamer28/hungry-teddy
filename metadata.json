@@ -1,0 +1,6 @@
+{
+  "name": "Hungry Teddy",
+  "description": "Hungry Teddy is a cloud kitchen located in Haldwani, and this app features an AI mascot to talk to.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

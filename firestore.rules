@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidReview(data) {
+      return data.keys().hasAll(['text', 'rating', 'authorId', 'authorName', 'createdAt'])
+        && data.keys().hasAny(['authorPhoto', 'text', 'rating', 'authorId', 'authorName', 'createdAt'])
+        && data.keys().size() <= 6
+        && data.text is string && data.text.size() > 0 && data.text.size() <= 1000
+        && data.rating is number && data.rating >= 1 && data.rating <= 5
+        && data.authorId is string && data.authorId == request.auth.uid && data.authorId.size() <= 128
+        && data.authorName is string && data.authorName.size() <= 100
+        && (('authorPhoto' in data) ? (data.authorPhoto is string && data.authorPhoto.size() <= 500) : true)
+        && data.createdAt is timestamp;
+    }
+
+    match /reviews/{reviewId} {
+      // Anyone can read reviews
+      allow read: if isValidId(reviewId);
+      
+      // Guests can query reviews
+      allow list: if true;
+
+      // Only signed in users can post a review
+      allow create: if isSignedIn()
+        && isValidId(reviewId)
+        && isValidReview(incoming())
+        && incoming().createdAt == request.time;
+        
+      allow update: if false;
+      allow delete: if isSignedIn() && existing().authorId == request.auth.uid;
+    }
+  }
+}

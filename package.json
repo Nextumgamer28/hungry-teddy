@@ -1,0 +1,26 @@
+{
+  "name": "hungry-teddy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "rm -rf dist && mkdir -p dist && cp index.html dist/ && cp -r css dist/ && cp -r js dist/ && cp server.js dist/ && cp firebase-applet-config.json dist/ && [ -d assets ] && cp -r assets dist/ || true"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "^8.7.1",
+    "@google/genai": "^2.15.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "firebase": "^12.17.1",
+    "googleapis": "^174.0.1",
+    "jsdom": "^30.0.0"
+  },
+  "devDependencies": {
+    "@firebase/eslint-plugin-security-rules": "^0.0.2",
+    "esbuild": "^0.28.1",
+    "eslint": "^10.8.1"
+  }
+}
